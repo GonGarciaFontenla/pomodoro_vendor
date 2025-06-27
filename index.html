@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pomodoro Timer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 overflow-x-hidden overflow-y-auto">
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full max-w-screen-2xl mx-auto p-6">
+    
+    <!-- IZQUIERDA -->
+    <div class="space-y-6 w-full">
+      
+      <!-- Pomodoros de hoy -->
+    <div class="p-4 rounded-xl border border-green-400 bg-green-50 shadow-inner">
+      <h2 class="text-xl font-semibold text-green-800 mb-2">Pomodoros de hoy</h2>
+      <p class="text-4xl font-bold text-green-700 flex items-center gap-2">
+        🍅 <span id="dailyCount">0</span>
+      </p>
+    </div>
+      <!-- Tareas -->
+      <div class="bg-gray-100 rounded-xl p-6 shadow-[inset_4px_4px_10px_#ccc,_inset_-4px_-4px_10px_#fff]">
+        <h2 class="text-2xl font-semibold mb-4">Tareas</h2>
+        <form id="taskForm" class="mb-4 flex gap-2">
+          <input type="text" id="taskInput" placeholder="Nueva tarea" class="flex-grow px-3 py-2 border rounded" required />
+          <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Agregar</button>
+        </form>
+        <ul id="taskList" class="space-y-2 max-h-48 overflow-auto"></ul>
+
+        <div class="mt-6">
+          <h3 class="text-lg font-semibold mb-2">Estadísticas por Tarea</h3>
+          <canvas id="taskStatsChart" class="w-full max-w-full h-[200px]"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- DERECHA -->
+    <div class="space-y-6 w-full">
+      
+      <!-- Pomodoro Timer -->
+      <div class="bg-gray-100 rounded-xl p-6 shadow-[inset_4px_4px_10px_#ccc,_inset_-4px_-4px_10px_#fff]">
+
+        <h1 class="text-3xl font-semibold mb-2">Pomodoro Timer</h1>
+        <p id="phase" class="text-gray-500 mb-4 text-lg">Trabajo</p>
+
+        <div class="relative w-40 h-40 mx-auto mb-6">
+          <svg class="absolute top-0 left-0 w-full h-full transform -rotate-90">
+            <circle cx="50%" cy="50%" r="70" stroke="#e5e7eb" stroke-width="12" fill="none" />
+            <circle id="progress" cx="50%" cy="50%" r="70" stroke="#10b981" stroke-width="12" fill="none" stroke-linecap="round" stroke-dasharray="439.82" stroke-dashoffset="0"/>
+          </svg>
+          <div id="timer" class="absolute inset-0 flex items-center justify-center text-4xl font-mono">25:00</div>
+        </div>
+
+        <div class="flex justify-center gap-4 mb-6">
+          <button id="start" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl">Start</button>
+          <button id="reset" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-xl">Reset</button>
+        </div>
+      </div>
+
+      <!-- Estadísticas semanales -->
+      <div class="bg-gray-100 rounded-xl p-6 shadow-[inset_4px_4px_10px_#ccc,_inset_-4px_-4px_10px_#fff]">
+        <h2 class="text-xl font-semibold mb-2">Pomodoros en los últimos 7 días</h2>
+        <canvas id="statsChart" class="w-full max-w-full h-[200px]"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
